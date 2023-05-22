@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuestionForm } from "../hooks/useQuestionForm";
+import Typewriter from "./Typewriter";
 
 const InitialQuestionString = "What is The Minimalist Entrepreneur about?";
 
 export const QuestionForm = () => {
+  const [doneTyping, setDoneTyping] = useState(false);
+
   const {
     questionString,
     question,
@@ -12,6 +15,10 @@ export const QuestionForm = () => {
     handleLuckyClick,
     handleResetClick,
   } = useQuestionForm({ initialQuestionString: InitialQuestionString });
+
+  const handleDoneTyping = () => {
+    setDoneTyping(true);
+  };
 
   return (
     <form>
@@ -44,15 +51,21 @@ export const QuestionForm = () => {
         {question && (
           <>
             <div className="my-4 text-left">
-              <strong className="font-bold">Answer:</strong> {question.answer}
+              <strong className="font-bold">Answer:</strong>{" "}
+              <Typewriter
+                text={question.answer}
+                onTypingComplete={handleDoneTyping}
+              />
             </div>
-            <button
-              type="button"
-              className="rounded py-2 px-4 text-lg bg-black text-white mr-4"
-              onClick={handleResetClick}
-            >
-              Ask another question
-            </button>
+            {doneTyping && (
+              <button
+                type="button"
+                className="rounded py-2 px-4 text-lg bg-black text-white mr-4"
+                onClick={handleResetClick}
+              >
+                Ask another question
+              </button>
+            )}
           </>
         )}
       </div>
