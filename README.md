@@ -26,7 +26,6 @@ rake 'pdf:import[/path/to/the.pdf]'
     - I've picked client-only routing with react-router + a catch-all route in the rails router
     - the drawbacks are: client-only rendering, not handling 404 on invalid question IDs
 
-- error handling (e.g. OpenAI API downtime) is not included in my code (I'd definitely spend more time on that)
 - I've intentionally left debug messages (Rails.logger.ap)
 
 - the Resemble API didn't work for me — sync requests were disabled for my account and enabling them requires to schedule a call
