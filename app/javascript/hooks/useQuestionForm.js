@@ -12,6 +12,7 @@ export const useQuestionForm = ({
   initialQuestionString,
   initialQuestion = null,
 }) => {
+  const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState(initialQuestion);
   const [questionString, setQuestionString] = useState(
     initialQuestion ? initialQuestion.question : initialQuestionString
@@ -27,6 +28,7 @@ export const useQuestionForm = ({
 
     navigate(`/questions/${response.data.id}`);
     setQuestion(response.data);
+    setLoading(false);
   };
 
   const handleChange = (e) => {
@@ -34,11 +36,14 @@ export const useQuestionForm = ({
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     response = await postQuestion(questionString);
     handleQuestionResponse(response);
   };
 
   const handleLuckyClick = async () => {
+    setLoading(true);
+
     const randomIndex = Math.floor(Math.random() * PredefinedQuestions.length);
     const randomQuestion = PredefinedQuestions[randomIndex];
     setQuestionString(randomQuestion);
@@ -59,5 +64,6 @@ export const useQuestionForm = ({
     handleResetClick: handleResetClick,
     questionString: questionString,
     question: question,
+    loading: loading,
   };
 };

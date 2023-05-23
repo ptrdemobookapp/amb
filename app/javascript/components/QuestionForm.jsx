@@ -8,6 +8,7 @@ export const QuestionForm = ({ initialQuestion = null }) => {
   const [doneTyping, setDoneTyping] = useState(false);
 
   const {
+    loading,
     questionString,
     question,
     handleChange,
@@ -29,6 +30,7 @@ export const QuestionForm = ({ initialQuestion = null }) => {
         className="block w-full p-2 border border-black rounded-md"
         value={questionString}
         onChange={handleChange}
+        disabled={loading}
       ></textarea>
 
       <div className="mt-4 text-left">
@@ -38,6 +40,7 @@ export const QuestionForm = ({ initialQuestion = null }) => {
               type="button"
               className="rounded py-2 px-4 text-lg bg-black text-white mr-4"
               onClick={handleSubmit}
+              disabled={loading}
             >
               Ask question
             </button>
@@ -45,9 +48,12 @@ export const QuestionForm = ({ initialQuestion = null }) => {
               type="button"
               className="rounded py-2 px-4 text-lg bg-gray-200"
               onClick={handleLuckyClick}
+              disabled={loading}
             >
               I'm feeling lucky
             </button>
+
+            {loading && <p className="mt-2">Loading...</p>}
           </>
         )}
 
