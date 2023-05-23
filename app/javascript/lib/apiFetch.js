@@ -24,28 +24,25 @@ export async function apiFetch({ url, options = {} }) {
       json = await response.json();
     } catch (error) {
       return {
-        code: response.status,
-        errorCode: response.status,
+        status: response.status,
         error: "Server error",
         data: null,
       };
     }
 
     if (response.status >= 200 && response.status < 300) {
-      return { code: response.status, errorCode: null, data: json };
+      return { status: response.status, data: json };
     }
 
     return {
-      code: response.status,
-      errorCode: response.status,
+      status: response.status,
       error: response.error || json.error || null,
       errors: json.errors,
       data: null,
     };
   } else {
     return {
-      code: response.status,
-      errorCode: response.status,
+      status: response.status,
       error: "Server error",
       data: null,
     };

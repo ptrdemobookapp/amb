@@ -12,10 +12,10 @@ export const QuestionPage = () => {
   useEffect(() => {
     const loadQuestion = async () => {
       response = await getQuestion(id);
-      if (response.code === 200) {
+      if (response.status === 200) {
         setQuestion(response.data);
       } else {
-        alert(`Unable to load question. Response: ${response.status}`);
+        alert(`Unable to load question: ${response.error}`);
       }
       setLoading(false);
     };

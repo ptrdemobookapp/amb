@@ -2,12 +2,12 @@ class Api::QuestionsController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   def create
-    question = FindOrCreateQuestion.call(question_params)
+    result = FindOrCreateQuestion.call(question_params)
 
-    if question.persisted?
-      render json: question.as_json(only: [:id, :question, :answer, :audio_src_url])
+    if result.error
+      render_error result.error, :unprocessable_entity
     else
-      render_error question.errors, :unprocessable_entity
+      render json: result.question.as_json(only: [:id, :question, :answer, :audio_src_url])
     end
   end
 
@@ -15,6 +15,8 @@ class Api::QuestionsController < ActionController::Base
     question = Question.find(params[:id])
 
     render json: question.as_json(only: [:id, :question, :answer, :audio_src_url])
+  rescue ActiveRecord::RecordNotFound
+    render_error "Question not found", :not_found
   end
 
   private
@@ -23,7 +25,7 @@ class Api::QuestionsController < ActionController::Base
       params.require(:question).permit(:question)
     end
 
-    def render_error(errors, status)
-      render json: { errors: errors }, status: status
+    def render_error(error, status)
+      render json: { error: error }, status: status
     end
 end

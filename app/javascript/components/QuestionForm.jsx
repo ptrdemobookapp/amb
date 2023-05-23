@@ -13,6 +13,7 @@ export const QuestionForm = ({ initialQuestion = null }) => {
     loading,
     questionString,
     question,
+    error,
     handleChange,
     handleSubmit,
     handleLuckyClick,
@@ -45,6 +46,12 @@ export const QuestionForm = ({ initialQuestion = null }) => {
 
   return (
     <form>
+      {error && (
+        <div className="my-3 border-2 border-red-200 bg-red-100 rounded text-red-700">
+          {error}
+        </div>
+      )}
+
       <textarea
         className="block w-full p-2 border border-black rounded-md"
         value={questionString}

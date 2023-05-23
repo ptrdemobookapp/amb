@@ -18,11 +18,13 @@ export const useQuestionForm = ({
   const [questionString, setQuestionString] = useState(
     initialQuestion ? initialQuestion.question : initialQuestionString
   );
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleQuestionResponse = (response) => {
-    if (response.code != 200) {
-      alert("This could be a better error message");
+    if (response.status != 200) {
+      setError(response.error);
+      setLoading(false);
       console.log(response);
       return;
     }
@@ -35,6 +37,7 @@ export const useQuestionForm = ({
   const handleChange = (e) => {
     setQuestionString(e.target.value);
     setQuestion(null);
+    setError(null);
   };
 
   const handleSubmit = async () => {
@@ -62,12 +65,13 @@ export const useQuestionForm = ({
   };
 
   return {
-    handleChange: handleChange,
-    handleSubmit: handleSubmit,
-    handleLuckyClick: handleLuckyClick,
-    handleResetClick: handleResetClick,
-    questionString: questionString,
-    question: question,
-    loading: loading,
+    handleChange,
+    handleSubmit,
+    handleLuckyClick,
+    handleResetClick,
+    questionString,
+    question,
+    loading,
+    error,
   };
 };
