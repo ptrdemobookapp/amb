@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.1.0)
     actioncable (7.0.4.3)
       actionpack (= 7.0.4.3)
       activesupport (= 7.0.4.3)
@@ -68,6 +69,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    afm (0.2.2)
     amazing_print (1.4.0)
     bindex (0.8.1)
     builder (3.2.4)
@@ -97,6 +99,7 @@ GEM
     faraday-net_http (3.0.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    hashery (2.1.2)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -137,6 +140,12 @@ GEM
     nokogiri (1.15.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    pdf-reader (2.11.0)
+      Ascii85 (~> 1.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     pg (1.5.3)
     public_suffix (5.0.1)
     puma (5.6.5)
@@ -172,6 +181,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    rb_sys (0.9.77)
     redis (4.8.1)
     regexp_parser (2.8.0)
     reline (0.3.4)
@@ -180,6 +190,7 @@ GEM
     ruby-openai (4.1.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
+    ruby-rc4 (0.1.5)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.9.1)
@@ -197,6 +208,9 @@ GEM
       railties (>= 6.0.0)
     thor (1.2.2)
     timeout (0.3.2)
+    tokenizers (0.3.3)
+      rb_sys
+    ttfunk (1.7.0)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -231,6 +245,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   neighbor
+  pdf-reader
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
@@ -239,6 +254,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   stimulus-rails
+  tokenizers
   turbo-rails
   tzinfo-data
   web-console

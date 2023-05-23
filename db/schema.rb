@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_054952) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_124947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
+
+  create_table "book_pages", force: :cascade do |t|
+    t.integer "number"
+    t.text "content", null: false
+    t.integer "tokens"
+    t.vector "embedding", limit: 1536
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["embedding"], name: "index_book_pages_on_embedding", opclass: :vector_ip_ops, using: :ivfflat
+    t.index ["number"], name: "index_book_pages_on_number", unique: true
+  end
 
   create_table "questions", force: :cascade do |t|
     t.string "question", limit: 140, null: false

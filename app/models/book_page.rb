@@ -1,0 +1,2 @@
+class BookPage < ApplicationRecord
+end

@@ -73,3 +73,5 @@ gem "ruby-openai"
 
 gem "amazing_print"
 
+gem "tokenizers", require: false
+gem "pdf-reader", require: false
