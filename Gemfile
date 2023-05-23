@@ -67,3 +67,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "neighbor"
+gem "ruby-openai"
+
+gem "amazing_print"
+

@@ -1,25 +1,22 @@
 import { useState } from "react";
-import { apiFetch } from "../lib/apiFetch.js";
+import { postQuestion } from "../lib/questionsApi.js";
+import { useNavigate } from "react-router-dom";
 
-const postQuestion = async (questionString) => {
-  const params = { question: { question: questionString } };
+const PredefinedQuestions = [
+  "What is a minimalist entrepreneur?",
+  "What is your definition of community?",
+  "How do I decide what kind of business I should start?",
+];
 
-  return apiFetch({
-    url: "/api/questions.json",
-    options: {
-      method: "POST",
-      body: JSON.stringify(params),
-    },
-  });
-};
-
-const getRandomQuestion = async () => {
-  return apiFetch({ url: "/api/questions/random.json" });
-};
-
-export const useQuestionForm = ({ initialQuestionString }) => {
-  const [question, setQuestion] = useState(null);
-  const [questionString, setQuestionString] = useState(initialQuestionString);
+export const useQuestionForm = ({
+  initialQuestionString,
+  initialQuestion = null,
+}) => {
+  const [question, setQuestion] = useState(initialQuestion);
+  const [questionString, setQuestionString] = useState(
+    initialQuestion ? initialQuestion.question : initialQuestionString
+  );
+  const navigate = useNavigate();
 
   const handleQuestionResponse = (response) => {
     if (response.code != 200) {
@@ -28,6 +25,7 @@ export const useQuestionForm = ({ initialQuestionString }) => {
       return;
     }
 
+    navigate(`/questions/${response.data.id}`);
     setQuestion(response.data);
   };
 
@@ -41,7 +39,11 @@ export const useQuestionForm = ({ initialQuestionString }) => {
   };
 
   const handleLuckyClick = async () => {
-    response = await getRandomQuestion(questionString);
+    const randomIndex = Math.floor(Math.random() * PredefinedQuestions.length);
+    const randomQuestion = PredefinedQuestions[randomIndex];
+    setQuestionString(randomQuestion);
+
+    response = await postQuestion(randomQuestion);
     handleQuestionResponse(response);
   };
 

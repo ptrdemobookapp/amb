@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :questions do
-      get :random, on: :collection
-    end
+    resources :questions, only: [:create, :show]
   end
 
   get '*path', to: "home#index", constraints: ->(request) do

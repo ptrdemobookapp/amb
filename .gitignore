@@ -69,3 +69,5 @@ yarn-debug.log*
 /public/uploads
 
 /app/assets/builds/*
+
+.envrc

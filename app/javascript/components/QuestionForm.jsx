@@ -4,7 +4,7 @@ import Typewriter from "./Typewriter";
 
 const InitialQuestionString = "What is The Minimalist Entrepreneur about?";
 
-export const QuestionForm = () => {
+export const QuestionForm = ({ initialQuestion = null }) => {
   const [doneTyping, setDoneTyping] = useState(false);
 
   const {
@@ -14,7 +14,10 @@ export const QuestionForm = () => {
     handleSubmit,
     handleLuckyClick,
     handleResetClick,
-  } = useQuestionForm({ initialQuestionString: InitialQuestionString });
+  } = useQuestionForm({
+    initialQuestionString: InitialQuestionString,
+    initialQuestion,
+  });
 
   const handleDoneTyping = () => {
     setDoneTyping(true);
