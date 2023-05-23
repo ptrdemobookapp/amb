@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useQuestionForm } from "../hooks/useQuestionForm";
-import Typewriter from "./Typewriter";
+import { Typewriter } from "./Typewriter";
+import { AudioPlayer } from "./AudioPlayer";
 
 const InitialQuestionString = "What is The Minimalist Entrepreneur about?";
 
@@ -97,6 +98,11 @@ export const QuestionForm = ({ initialQuestion = null }) => {
             )}
           </>
         )}
+
+        <AudioPlayer
+          play={question}
+          src={question ? question.audio_src_url : null}
+        />
       </div>
     </form>
   );

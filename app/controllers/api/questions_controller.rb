@@ -5,7 +5,7 @@ class Api::QuestionsController < ActionController::Base
     question = FindOrCreateQuestion.call(question_params)
 
     if question.persisted?
-      render json: question.as_json(only: [:id, :question, :answer])
+      render json: question.as_json(only: [:id, :question, :answer, :audio_src_url])
     else
       render_error question.errors, :unprocessable_entity
     end
@@ -14,7 +14,7 @@ class Api::QuestionsController < ActionController::Base
   def show
     question = Question.find(params[:id])
 
-    render json: question.as_json(only: [:id, :question, :answer])
+    render json: question.as_json(only: [:id, :question, :answer, :audio_src_url])
   end
 
   private

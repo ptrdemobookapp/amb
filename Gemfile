@@ -75,3 +75,5 @@ gem "amazing_print"
 
 gem "tokenizers", require: false
 gem "pdf-reader", require: false
+gem "resemble"
+gem "httparty" # resemble requires it

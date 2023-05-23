@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 
-const Typewriter = ({ text, onTypingComplete }) => {
-  const typingSpeed = 100; // Set the typing speed (milliseconds between each character)
+export const Typewriter = ({ text, onTypingComplete }) => {
+  const typingSpeed = 50; // Set the typing speed (milliseconds between each character)
   const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
@@ -22,5 +22,3 @@ const Typewriter = ({ text, onTypingComplete }) => {
 
   return <span>{typedText}</span>;
 };
-
-export default Typewriter;

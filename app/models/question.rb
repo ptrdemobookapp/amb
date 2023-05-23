@@ -1,4 +1,6 @@
 class Question < ApplicationRecord
+  has_neighbors :embedding
+
   validates :question, presence: true, length: { maximum: 140 }
   validates :slug, presence: true, uniqueness: true
 
