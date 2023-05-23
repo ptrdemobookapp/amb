@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_054952) do
     t.text "answer"
     t.integer "ask_count", default: 1
     t.string "audio_src_url"
-    t.vector "embedding", limit: 4096
+    t.vector "embedding", limit: 1536
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_questions_on_slug", unique: true

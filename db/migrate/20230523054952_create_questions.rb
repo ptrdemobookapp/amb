@@ -8,7 +8,7 @@ class CreateQuestions < ActiveRecord::Migration[7.0]
       t.text :answer, limit: 1000
       t.integer :ask_count, default: 1
       t.string :audio_src_url
-      t.vector :embedding, limit: 4096
+      t.vector :embedding, limit: 1536
       t.timestamps
     end
     add_index :questions, :slug, unique: true
