@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 export const Typewriter = ({ text, onTypingComplete }) => {
-  const typingSpeed = 50; // Set the typing speed (milliseconds between each character)
+  const typingSpeed = 40; // Set the typing speed (milliseconds between each character)
   const [typedText, setTypedText] = useState("");
 
   useEffect(() => {

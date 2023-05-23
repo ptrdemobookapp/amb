@@ -34,6 +34,7 @@ export const useQuestionForm = ({
 
   const handleChange = (e) => {
     setQuestionString(e.target.value);
+    setQuestion(null);
   };
 
   const handleSubmit = async () => {
