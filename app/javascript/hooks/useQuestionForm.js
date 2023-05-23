@@ -11,6 +11,7 @@ const PredefinedQuestions = [
 export const useQuestionForm = ({
   initialQuestionString,
   initialQuestion = null,
+  textareaRef,
 }) => {
   const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState(initialQuestion);
@@ -55,6 +56,8 @@ export const useQuestionForm = ({
   const handleResetClick = () => {
     setQuestionString(initialQuestionString);
     setQuestion(null);
+    textareaRef.current.focus();
+    textareaRef.current.select();
   };
 
   return {

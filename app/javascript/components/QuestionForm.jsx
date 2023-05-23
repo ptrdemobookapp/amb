@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useQuestionForm } from "../hooks/useQuestionForm";
 import Typewriter from "./Typewriter";
 
@@ -6,6 +6,7 @@ const InitialQuestionString = "What is The Minimalist Entrepreneur about?";
 
 export const QuestionForm = ({ initialQuestion = null }) => {
   const [doneTyping, setDoneTyping] = useState(false);
+  const textareaRef = useRef(null);
 
   const {
     loading,
@@ -18,7 +19,24 @@ export const QuestionForm = ({ initialQuestion = null }) => {
   } = useQuestionForm({
     initialQuestionString: InitialQuestionString,
     initialQuestion,
+    textareaRef,
   });
+
+  useEffect(() => {
+    if (!loading || !doneTyping) return;
+
+    setDoneTyping(false);
+  }, [loading]);
+
+  // an ugly hack to put the caret at the end of the textarea
+  useEffect(() => {
+    if (!textareaRef.current) return;
+
+    const inputEl = textareaRef.current;
+    const len = inputEl.value.length;
+    inputEl.focus();
+    inputEl.setSelectionRange(len, len);
+  }, [textareaRef]);
 
   const handleDoneTyping = () => {
     setDoneTyping(true);
@@ -31,6 +49,8 @@ export const QuestionForm = ({ initialQuestion = null }) => {
         value={questionString}
         onChange={handleChange}
         disabled={loading}
+        ref={textareaRef}
+        autoFocus
       ></textarea>
 
       <div className="mt-4 text-left">
