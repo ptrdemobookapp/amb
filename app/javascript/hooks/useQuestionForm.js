@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { postQuestion } from "../lib/questionsApi.js";
-import { useNavigate } from "react-router-dom";
 
 const PredefinedQuestions = [
   "What is a minimalist entrepreneur?",
@@ -19,7 +18,6 @@ export const useQuestionForm = ({
     initialQuestion ? initialQuestion.question : initialQuestionString
   );
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleQuestionResponse = (response) => {
     if (response.status != 200) {
@@ -29,7 +27,8 @@ export const useQuestionForm = ({
       return;
     }
 
-    navigate(`/questions/${response.data.id}`);
+    window.history.pushState({}, null, `/questions/${response.data.id}`);
+
     setQuestion(response.data);
     setLoading(false);
   };
